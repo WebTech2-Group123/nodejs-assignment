@@ -6,7 +6,7 @@ const EventEmitter = require('events');
 
 
 // delay time (between weather.js's updates)
-const DELAY = 1500; // ms
+const DELAY = 3500; // ms
 
 // weather.js states & quotes
 const WEATHERS = ['Sunny', 'Cloudy', 'Rainy'];

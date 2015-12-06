@@ -11,7 +11,6 @@ $(function () {
     // connected to the server
     socket.on('connect', function () {
         console.log('connect');
-        showWeather();
     });
 
     // disconnected (eg. problems with the connection to the server)
@@ -24,6 +23,7 @@ $(function () {
     socket.on('weather', function (weather) {
         console.log('weather: ' + JSON.stringify(weather));
         displayWeather(weather);
+        showWeather();
     });
 
     /////////////////////////////////////////////////////////////////////
@@ -34,10 +34,10 @@ $(function () {
     var $weather = $('.weather');
     var $weatherTitle = $weather.find('.title');
     var $weatherImage = $weather.find('.image');
-    var $weatherTemperature = $weather.find('.temperature');
+    var $weatherTemperature = $weather.find('.temperature > span');
     var $weatherQuoteText = $weather.find('.quote-text');
     var $weatherQuoteAuthor = $weather.find('.quote-author');
-    var $weatherUpdateTime = $weather.find('.update-time');
+    var $weatherUpdateTime = $weather.find('.update-time > span');
 
     function showLoading() {
         $weather.hide();
@@ -65,13 +65,33 @@ $(function () {
         }
     }
 
+    function dateToHHMMSS(millis) {
+        var date = new Date(millis);
+        var hh = date.getUTCHours();
+        var mm = date.getUTCMinutes();
+        var ss = date.getSeconds();
+
+        // ensure two-digits
+        if (hh < 10) {
+            hh = "0" + hh;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+        if (ss < 10) {
+            ss = "0" + ss;
+        }
+
+        return hh + ":" + mm + ":" + ss;
+    }
+
     function displayWeather(weather) {
         $weatherTitle.text(weather.weather);
         $weatherImage.attr('src', weatherToImage(weather.weather));
         $weatherTemperature.text(weather.temperature);
         $weatherQuoteText.text(weather.quote.text);
         $weatherQuoteAuthor.text(weather.quote.author);
-        $weatherUpdateTime.text(new Date(weather.time).toDateString());
+        $weatherUpdateTime.text(dateToHHMMSS(weather.time));
     }
 
 });
