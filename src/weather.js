@@ -5,10 +5,10 @@ const util = require('util');
 const EventEmitter = require('events');
 
 
-// delay time (between weather's updates)
+// delay time (between weather.js's updates)
 const DELAY = 1500; // ms
 
-// weather states & quotes
+// weather.js states & quotes
 const WEATHERS = ['Sunny', 'Cloudy', 'Rainy'];
 const MIN_TEMPERATURE = -20; // °C
 const MAX_TEMPERATURE = +40; // °C
@@ -53,7 +53,7 @@ util.inherits(WeatherGenerator, EventEmitter);
 WeatherGenerator.prototype.run = function () {
     this.interval = setInterval(() => {
 
-        // create weather object
+        // create weather.js object
         let obj = {
             weather: random(WEATHERS),
             temperature: randomTemperature(MAX_TEMPERATURE, MIN_TEMPERATURE),
