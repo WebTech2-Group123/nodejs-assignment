@@ -61,7 +61,7 @@ $(function () {
                 return 'img/rain.png';
 
             default:
-                return 'img/question.png';
+                return 'img/question.jpg';
         }
     }
 
