@@ -24,6 +24,14 @@ const QUOTES = [
     {
         text: 'The wisest mind has something yet to learn.',
         author: 'George Santayana'
+    },
+    {
+        text: 'This is the coolest web site ever!',
+        author: 'Alex'
+    },
+    {
+        text: 'Success is something you attract by the person you become.',
+        author: 'Jim Rohn'
     }
 ];
 
