@@ -29,11 +29,24 @@ var io = socket()
     .listen(httpServer)
     .listen(httpsServer);
 
+// cache
+var cache = null;
+
 // weather generator
 var generator = weather.createGenerator(function (weather) {
 
+    // update the cache
+    cache = weather;
+
     // new meteo update -> push it to all the connected clients
     io.emit('weather', weather);
+});
+
+// when a client connects -> push the last available data
+io.on('connect', function (socket) {
+    if (cache) {
+        socket.emit('weather', cache);
+    }
 });
 
 // run weather generator

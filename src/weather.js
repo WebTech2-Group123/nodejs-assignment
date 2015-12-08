@@ -59,7 +59,7 @@ util.inherits(WeatherGenerator, EventEmitter);
 
 // run the generator
 WeatherGenerator.prototype.run = function () {
-    this.interval = setInterval(() => {
+    var callback = () => {
 
         // create weather.js object
         let obj = {
@@ -71,8 +71,10 @@ WeatherGenerator.prototype.run = function () {
 
         // emit event
         this.emit('weather_update', obj);
+    };
 
-    }, DELAY);
+    this.interval = setInterval(callback, DELAY);
+    callback();
 }
 
 // stop the generator
